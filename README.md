@@ -4,10 +4,18 @@ The official repo of the CVPR 2020 paper "VecRoad: Point-based Iterative Graph E
 Codes will be released in the next few days. Patience. :)
 
 # Datasets
-[Baidu Netdisk](https://pan.baidu.com/s/1a4-62RjEgPJ44cGghFeeWg) <= code：rndl
+OSM Dataset [Baidu Netdisk](https://pan.baidu.com/s/1a4-62RjEgPJ44cGghFeeWg) <= code：rndl
+
+# Requirements
+pytorch >= 0.4.1
+
+# Inference
+```
+python infer.py --config configs/default.yml
+```
 
 # Training Scripts
-Owing to the private limitation, training scripts couldn't be released right now.
+Due to certain restrictions, the training script cannot be released at this time.
 
 # Citation
 If you find this work or code is helpful in your research, please cite:
