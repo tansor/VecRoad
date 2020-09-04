@@ -1,0 +1,96 @@
+TASK: &TASK ""
+
+DIR:
+  DATA_ROOT:       &DATA_ROOT "data"
+  IMAGERY_DIR:      "data/input/imagery/"
+  TEST_IMAGERY_DIR: "data/input/imagery_8192/"
+  GRAPH_DIR:        "data/input/graphs/"
+  IMG_COORD_PATH:   "data/input/regions/pytiles.json"
+  TEST_REGION_PATH: "data/input/regions/test_regions.txt"
+  PRE_JUNC_NMS_DIR: "data/input/junction_nms/"
+  CHECK_POINT_DIR: !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "ckpt"]
+  LOG_DIR:         !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "logs"]
+  SAVE_SEG_DIR:    !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "segmentation"]
+  INFER_STEP_DIR:  !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "infer_step"]
+  SAVE_GRAPH_DIR:  !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "graphs"]
+
+TRAIN:
+  NUM_TARGETS: 4
+  # number of t time steps per patch in training network definition
+  PARALLEL_TILES: 2048
+  # parallel training image cadidates
+  IMG_SZ: 4096
+  # input image size, default 4096 x 4096
+  TRAINING_REGIONS: [
+    'indianapolis', 'louisville', 'columbus', 'milwaukee', 'minneapolis', 'seattle', 'portland', 'sf',
+    'san antonio', 'vegas', 'phoenix', 'dallas', 'austin', 'san jose', 'houston', 'miami', 'tampa',
+    'orlando', 'atlanta', 'st louis', 'nashville', 'dc', 'baltimore', 'philadelphia', 'london']
+
+TEST:
+  CKPT: &CKPT "vecroad"
+  # checkpoint pth used to load
+  GPU_ID: "0"
+  # GPU selection
+  CPU_WORKER: 15
+  # cpu workers to do multiprocessing
+  DATA_PARALLEL: True
+  # torch.nn.DataParallel
+  BATCH_SIZE_SEG: 1
+  # batch size used to obtain road and junction segmentation
+  BATCH_SIZE_ANCHOR: 15
+  # batch size used to generate road graphs
+
+  TEST_IMG_SZ: 8192
+  # input image size, default 8192 x 8192
+  CROP_SZ: 2048
+  # cropped size to obtain road and junction segmentation, 
+  # then stick them back owing to the limitation of gpu memory
+  WINDOW_SIZE: 256
+  # window size of each patch for road graph exploration
+  INFER_STEP: "start"
+  # "start" "after_seg" "after_junc_nms" "after_graph_from_junc"
+  # "given_junc_nms" is used when specifying junction nms map to obtain starting points
+  # 1. Start
+  # 2. infer road segmentation and junc segmentation
+  # 3. segmentation to starting points
+    # 3.1 junc
+    # 3.2 road
+  # 4. graph exploration
+    # 4.1 start from junc
+    # 4.2 start from road (optional)
+  SINGLE_REGION: ""  # amsterdam
+  # option for inferring only one region
+  START_FROM_ROAD_PEAK: False
+  # obtain starting points from road segmentation (optional)
+  START_FROM_JUNC_PEAK: True
+  # obtain starting points from junction segmentation
+
+  NUM_TARGETS: 4
+  # number of t time steps per patch
+  STEP_LENGTH: 20
+  # fixed step length of each next move
+  RECT_RADIUS: 10
+  # a hyper-parameter to detect error connection
+  FOLLOW_MODE: "follow_output"
+  # whether to follow the output of CNNs to obtain next point coordinate
+  AVG_CONFIDENCE_THRESHOLD: 0.2
+  # a hyper-parameter to detect error connection
+  BINARIZE_MAP:
+    ROAD_SEG_THRESHOLE: 0.3
+    # a hyper-parameter to discard road segmentation lower than ROAD_SEG_THRESHOLE
+    JUNC_MAX_REGION_AREA: 200
+    # a hyper-parameter to detect junction starting points when doing junction segmentation nms
+    JUNC_SEG_THRESHOLE: 0.3
+    # a hyper-parameter to discard junction segmentation lower than JUNC_SEG_THRESHOLE
+    ANCHOR_MAX_REGION_AREA: 1000
+    # a hyper-parameter to detect next points when doing road graph exploration
+    MIN_BAD_ROAD_AREA: 200
+    # a hyper-parameter to discard road clusters smaller than MIN_BAD_ROAD_AREA
+    # apply on road segmentation, when doing road starting points selection
+
+  SAVE_EXAMPLES: False
+  # whether to save intermediate results
+  SAVE_IDX: 0
+  # the index of region to save intermediate results
+  PRINT_ITERATION: 500
+  # log print frequency
