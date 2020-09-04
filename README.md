@@ -6,27 +6,27 @@ The official repo of the CVPR 2020 paper "VecRoad: Point-based Iterative Graph E
 
 ![demo](demo.jpg)
 
-# Prepare Data
+## Prepare Data
 
-## Datasets
+### Datasets
 
 OSM Dataset [Baidu Netdisk](https://pan.baidu.com/s/1OKG6R1CwAESbHTPXTZdH5w) with code: f97v
 
-## Pretrained models
+### Pretrained models
 
 RP-Net [Baidu NetDisk](https://pan.baidu.com/s/15Qloov4cuJCQPDSYcv9G8w)
 with code: 9nk4
 
-## Evaluation matrics
+### Evaluation matrics
 
-apls-visualizer-1.0 [Baidu Netdisk](https://pan.baidu.com/s/1xm_FDxJE81KEGbTW8-suJQ) with code: ugbz
+apls-visualizer-1.0 [Baidu Netdisk](https://pan.baidu.com/s/1xm_FDxJE81KEGbTW8-suJQ) with code: ugbz | [Google Drive](https://drive.google.com/file/d/1rwbj_o-ELBfruPZuVkCnEQxAX2-Pz5DX/view?usp=sharing)
 
-## Steps
+### Steps
 
 1. Download [OSM Dataset](https://pan.baidu.com/s/1OKG6R1CwAESbHTPXTZdH5w), [RP-Net](https://pan.baidu.com/s/15Qloov4cuJCQPDSYcv9G8w) and [APLS](https://pan.baidu.com/s/1xm_FDxJE81KEGbTW8-suJQ) into `data/downloads`.
 2. `sh prepare_data.sh`
 
-# Requirements
+## Requirements
 
 conda could install the right version of `rtree`.
 
@@ -43,13 +43,13 @@ scikit-image==0.15.0
 pyyaml==5.1
 ```
 
-# Inference
+## Inference
 
 ``` python
 python infer.py --config configs/default.yml
 ```
 
-# Evaluation
+## Evaluation
 
 Junction Metric (Java needed). Please refer to [roadtracer](https://github.com/mitroadmaps/roadtracer) for more details.
 
@@ -88,7 +88,7 @@ python eval/graphs2seg.py \
 ```
 
 
-# Citation
+## Citation
 
 If you find this work or code is helpful in your research, please cite:
 ```
@@ -100,12 +100,12 @@ If you find this work or code is helpful in your research, please cite:
 }
 ```
 
-# License
+## License
 
 Our source code is free for non-commercial usage.
 Please contact us if you want to use it for comercial usage.
 (yoqitan -AT- outlook -DOT- com)
 
-# Training Scripts
+## Training Scripts
 
 Due to certain restrictions, the training script cannot be released at this time.
