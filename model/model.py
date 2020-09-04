@@ -29,12 +29,9 @@ class ConvReLU(nn.Module):
 
 class DecoderBlock(nn.Module):
 
-    def __init__(self, ft_ch, out_ch, tail_block=False, res_ch=32, atten_ch=32):
+    def __init__(self, ft_ch, out_ch, res_ch=32):
         super(DecoderBlock, self).__init__()
-        self.is_tail = tail_block
         self.res_ch = res_ch
-        self.atten_ch = atten_ch
-        self.cat_ch = self.atten_ch + 32 if not tail_block else self.atten_ch + 32
 
         self.ft_conv = nn.Sequential(
             ConvReLU(ft_ch, 32, 1))
@@ -153,7 +150,7 @@ class RPNet(nn.Module):
 
         self.ft_chs = [1024, 512, 256, 64]
         self.decoders = nn.ModuleList([
-            DecoderBlock(self.ft_chs[0], 32, tail_block=True),
+            DecoderBlock(self.ft_chs[0], 32),
             DecoderBlock(self.ft_chs[1], 32),
             DecoderBlock(self.ft_chs[2], 32),
             DecoderBlock(self.ft_chs[3], 32),
