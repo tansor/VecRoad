@@ -29,15 +29,14 @@ class ConvReLU(nn.Module):
 
 class DecoderBlock(nn.Module):
 
-    def __init__(self, ft_ch, out_ch, res_ch=32):
+    def __init__(self, ft_in, ft_out, out_ch):
         super(DecoderBlock, self).__init__()
-        self.res_ch = res_ch
 
         self.ft_conv = nn.Sequential(
-            ConvReLU(ft_ch, 32, 1))
+            ConvReLU(ft_in, ft_out, 1))
         self.conv = nn.Sequential(
-            ConvReLU(self.cat_ch, self.res_ch, 3),
-            nn.Conv2d(self.res_ch, out_ch, 3, padding=1))
+            ConvReLU(out_ch + ft_out, (out_ch + ft_out) // 2, 3),
+            nn.Conv2d((out_ch + ft_out) // 2, out_ch, 3, padding=1))
 
     def forward(self, ft_cur, ft_pre):
         ft_cur = self.ft_conv(ft_cur)
@@ -150,10 +149,10 @@ class RPNet(nn.Module):
 
         self.ft_chs = [1024, 512, 256, 64]
         self.decoders = nn.ModuleList([
-            DecoderBlock(self.ft_chs[0], 32),
-            DecoderBlock(self.ft_chs[1], 32),
-            DecoderBlock(self.ft_chs[2], 32),
-            DecoderBlock(self.ft_chs[3], 32),
+            DecoderBlock(self.ft_chs[0], 32, 32),
+            DecoderBlock(self.ft_chs[1], 32, 32),
+            DecoderBlock(self.ft_chs[2], 32, 32),
+            DecoderBlock(self.ft_chs[3], 32, 32),
         ])
         self.next_step_final = nn.Conv2d(32, 1, 1, 1, 0)
         self.conv_final = nn.Conv2d(32, 1, 3, 1, 1)
