@@ -23,7 +23,7 @@ apls-visualizer-1.0 [Baidu Netdisk](https://pan.baidu.com/s/1xm_FDxJE81KEGbTW8-s
 
 ### Steps
 
-1. Download [OSM Dataset](https://pan.baidu.com/s/1OKG6R1CwAESbHTPXTZdH5w), [RP-Net](https://pan.baidu.com/s/15Qloov4cuJCQPDSYcv9G8w) and [APLS](https://pan.baidu.com/s/1xm_FDxJE81KEGbTW8-suJQ) into `data/downloads`.
+1. Download OSM Dataset, RP-Net and APLS-visualizer into `data/downloads`.
 2. `sh prepare_data.sh`
 
 ## Requirements
