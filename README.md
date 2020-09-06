@@ -51,7 +51,7 @@ python infer.py --config configs/default.yml
 
 ## Evaluation
 
-Junction Metric (Java needed). Please refer to [roadtracer](https://github.com/mitroadmaps/roadtracer) for more details.
+Junction Metric (Golang needed). Please refer to [roadtracer](https://github.com/mitroadmaps/roadtracer) for more details.
 
 ``` python
 python eval/eval_junction_metric.py \
@@ -61,7 +61,7 @@ python eval/eval_junction_metric.py \
     --file_name graphs_junc_jf1.csv
 ```
 
-APLS Metric (Golang needed). Please refer to [Spacenet Challenge](https://github.com/SpaceNetChallenge) for more details.
+APLS Metric (Java needed). Please refer to [Spacenet Challenge](https://github.com/SpaceNetChallenge) for more details.
 
 ``` python
 python eval/graphs2wkt.py \
