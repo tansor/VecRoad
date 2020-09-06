@@ -78,7 +78,7 @@ def worker(img_idx, result_fn):
     true = []
     recall_tp = []
     for thresh in rng:
-        thresh = thresh * 1. / 256
+        thresh = thresh * 1. / 255
         pred_vals = np.array(pred[:, :] >= thresh, dtype=np.int32)
         label_vals = np.array(label, dtype=np.int32)
 
