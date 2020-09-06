@@ -4,4 +4,5 @@ unzip data/downloads/imagery_test.zip -d data/input/
 unzip data/downloads/graphs.zip -d data/input/
 unzip data/downloads/regions.zip -d data/input/
 unzip data/downloads/graphs_test_wkt.zip -d data/input/
+unzip data/downloads/mask_test.zip -d data/input/
 unzip data/downloads/apls.zip -d eval/

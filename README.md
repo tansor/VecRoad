@@ -10,7 +10,7 @@ The official repo of the CVPR 2020 paper "VecRoad: Point-based Iterative Graph E
 
 ### Datasets
 
-OSM Dataset [Baidu Netdisk](https://pan.baidu.com/s/1OKG6R1CwAESbHTPXTZdH5w) with code: f97v
+OSM Dataset [Baidu Netdisk](https://pan.baidu.com/s/127Bx28LMQC4X4m5rNvRWcA) with code: 2xoe
 
 ### Pretrained models
 
@@ -85,6 +85,15 @@ python eval/graphs2seg.py \
     --region_file data/input/regions/test_regions.txt \
     --img_size 8192 \
     --thickness 8
+
+python eval/eval_pixel_metric.py \
+    --pred_dir data/graphs/vecroad_4/graphs_junc_seg \
+    --gt_dir data/input/mask_test \
+    --steps 1 \
+    --relax 3 \
+    --num_workers 12 \
+    --thresh 128 \
+    --crop 0
 ```
 
 
