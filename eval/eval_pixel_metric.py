@@ -71,7 +71,7 @@ def worker(img_idx, result_fn):
     if args.thresh != -1:
         rng = [args.thresh]
     else:
-        rng = np.linspace(0, 256, args.steps)
+        rng = np.linspace(0, 255, args.steps)
 
     positive = []
     prec_tp = []
