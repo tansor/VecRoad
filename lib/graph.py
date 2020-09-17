@@ -379,7 +379,7 @@ def read_graph(file_name, merge_duplicates=True):
                 if len(parts) == 2:
                     point = geom.Point(float(parts[0]), float(parts[1]))
                     if point in seen_points and merge_duplicates:
-                        print('merging duplicate vertex at {}'.format(point))
+                        #print('merging duplicate vertex at {}'.format(point))
                         vertices[next_vertex_id] = seen_points[point]
                     else:
                         vertex = graph.add_vertex(point)
@@ -389,7 +389,7 @@ def read_graph(file_name, merge_duplicates=True):
                 elif len(parts) == 3:
                     point = geom.Point(float(parts[1]), float(parts[2]))
                     if point in seen_points and merge_duplicates:
-                        print('merging duplicate vertex at {}'.format(point))
+                        #print('merging duplicate vertex at {}'.format(point))
                         vertices[next_vertex_id] = seen_points[point]
                     else:
                         vertex = graph.add_vertex(point, int(parts[0]))
@@ -402,14 +402,14 @@ def read_graph(file_name, merge_duplicates=True):
                 src = int(parts[0])
                 dst = int(parts[1])
                 if vertices[src].point == vertices[dst].point and merge_duplicates:
-                    print('ignoring self edge at {}'.format(vertices[src].point))
+                    #print('ignoring self edge at {}'.format(vertices[src].point))
                     continue
                 graph.add_edge(vertices[src].id, vertices[dst].id)
             elif len(parts) == 3:
                 src = int(parts[1])
                 dst = int(parts[2])
                 if vertices[src].point == vertices[dst].point and merge_duplicates:
-                    print('ignoring self edge at {}'.format(vertices[src].point))
+                    #print('ignoring self edge at {}'.format(vertices[src].point))
                     continue
                 graph.add_edge(vertices[src].id, vertices[dst].id, int(parts[0]))
     for vertex in graph.vertices.values():
