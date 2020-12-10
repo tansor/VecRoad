@@ -12,7 +12,7 @@ The official repo of the CVPR 2020 paper "VecRoad: Point-based Iterative Graph E
 
 OSM Dataset [Baidu Netdisk](https://pan.baidu.com/s/127Bx28LMQC4X4m5rNvRWcA) with code: 2xoe
 
-### Pretrained models
+### Released models
 
 RP-Net [Baidu NetDisk](https://pan.baidu.com/s/15Qloov4cuJCQPDSYcv9G8w)
 with code: 9nk4
