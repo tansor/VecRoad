@@ -114,7 +114,3 @@ If you find this work or code is helpful in your research, please cite:
 Our source code is free for non-commercial usage.
 Please contact us if you want to use it for comercial usage.
 (yoqitan -AT- outlook -DOT- com)
-
-## Training Scripts
-
-Due to certain restrictions, the training script cannot be released at this time.

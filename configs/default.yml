@@ -26,6 +26,31 @@ TRAIN:
     'san antonio', 'vegas', 'phoenix', 'dallas', 'austin', 'san jose', 'houston', 'miami', 'tampa',
     'orlando', 'atlanta', 'st louis', 'nashville', 'dc', 'baltimore', 'philadelphia', 'london']
 
+  MAX_PATH_LENGTH: 2048
+  STEP_LENGTH: 20
+  SAVE_ITERATIONS: 2048
+  SAVE_EXAMPLES: True
+  WINDOW_SIZE: 256
+  FOLLOW_MODE: "follow_target"  # "follow_output"
+  PRINT_ITERATION: 20
+  NUM_INPUT_CHANNELS: 3
+  SOLVER:
+    METHOD: "Adam"
+    LEARNING_RATE: !!float 1e-4
+    WEIGHT_DECAY: !!float 2e-4
+  GPU_ID: "0,1"
+  BATCH_SIZE: 20 # 24
+  DATA_PARALLEL: True
+  LOAD_CHECK_POINT: False
+  START_EPOCH: 0
+  CHECK_POINT_NAME: "29.2047.pth.tar"
+  TOTAL_ITERATION: 50
+  RECT_RADIUS: 8
+  AVG_CONFIDENCE_THRESHOLD: 0.2
+  BINARIZE_MAP:
+    SEGMENTATION_THRESHOLD: 0.2
+    MAX_REGION_AREA: 200
+
 TEST:
   CKPT: &CKPT "vecroad"
   # checkpoint pth used to load
