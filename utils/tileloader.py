@@ -156,7 +156,7 @@ def get_starting_locations(gc):
 
 
 class Tiles(object):
-    def __init__(self, training_regions, parallel_tiles, region_dir, graph_dir, tile_dir, 
+    def __init__(self, training_regions, parallel_tiles, region_path, graph_dir, tile_dir, 
                  tile_size=4096, train_tile_size=2048, window_size=256, validate=False):
         self.parallel_tiles = parallel_tiles
 
@@ -178,7 +178,7 @@ class Tiles(object):
         else:
             self.all_regions = self.training_regions
 
-        self.all_tiles = get_regions(region_dir)
+        self.all_tiles = get_regions(region_path)
         self.train_tiles = [tile for tile in self.all_tiles.values() if tile.name in self.training_regions]
         self.cache = TileCache(
             limit=self.parallel_tiles, tile_dir=self.tile_dir, 
@@ -208,7 +208,7 @@ class Tiles(object):
 
         print("split regions to 2048x2048 parallel tiles")
         for tile in self.train_tiles:
-            tile = geon.Point(tile.x, tile.y)
+            tile = geom.Point(tile.x, tile.y)
             big_rect = geom.Rectangle(
                 tile.scale(self.tile_size),
                 tile.add(geom.Point(1, 1)).scale(self.tile_size)

@@ -20,8 +20,11 @@ class OSMDataset:
         self.seg_input = seg_input
         self.num_targets = cfg.TRAIN.NUM_TARGETS
         self.paths = []
-        self.tiles = Tiles(self.cfg.TRAIN.PARALLEL_TILES, pytiles_path=cfg.DIR.PYTILES_PATH,
-                           graph_dir=cfg.DIR.GRAPH_DIR, tile_dir=cfg.DIR.TILE_DIR)
+        self.tiles = Tiles(training_regions=self.cfg.TRAIN.TRAINING_REGIONS, 
+                           parallel_tiles=self.cfg.TRAIN.PARALLEL_TILES, 
+                           region_path=cfg.DIR.IMG_COORD_PATH,
+                           graph_dir=cfg.DIR.GRAPH_DIR, 
+                           tile_dir=cfg.DIR.TILE_DIR)
         self.save_idx = 0
         self.training = training
         self.subtiles = self.tiles.prepare_training()
