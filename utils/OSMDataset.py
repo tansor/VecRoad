@@ -22,7 +22,7 @@ class OSMDataset:
         self.paths = []
         self.tiles = Tiles(training_regions=self.cfg.TRAIN.TRAINING_REGIONS, 
                            parallel_tiles=self.cfg.TRAIN.PARALLEL_TILES, 
-                           region_path=cfg.DIR.IMG_COORD_PATH,
+                           region_path=cfg.DIR.ALL_REGION_PATH,
                            graph_dir=cfg.DIR.GRAPH_DIR, 
                            tile_dir=cfg.DIR.TILE_DIR)
         self.save_idx = 0
