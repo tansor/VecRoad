@@ -746,7 +746,7 @@ class Path(object):
 
         ################ road_seg & junc_seg ################
         road_seg_small = junc_seg_small = None
-        if 'road_seg_small' in fetch_list or 'junc_seg_small' in fetch_list:
+        if 'road_seg_small' in fetch_list or 'junc_seg_small' in fetch_list or 'road_seg_thick3' in fetch_list:
             seg_rect = rect
             seg_origin = seg_rect.start
             if self.is_training:
@@ -754,6 +754,7 @@ class Path(object):
                     (WINDOW_SIZE // 4, WINDOW_SIZE // 4), dtype=np.float32)
                 junc_seg_small = np.zeros(
                     (WINDOW_SIZE // 4, WINDOW_SIZE // 4), dtype=np.float32)
+                road_seg_thick3 = np.zeros((self.win_sz, self.win_sz), dtype=np.float32)
                 for edge in self.gc.edge_index.search(seg_rect):
                     if 'junc_seg_small' in fetch_list:
                         for vertex in [edge.src(self.gc.graph), edge.dst(self.gc.graph)]:
@@ -762,7 +763,7 @@ class Path(object):
                                 pnt = pnt.sub(seg_origin)
                                 cv.circle(
                                     junc_seg_small, (pnt.y // 4, pnt.x // 4), radius=2, color=1, thickness=-1)
-                    if 'road_seg_small' in fetch_list:
+                    if 'road_seg_small' in fetch_list or 'road_seg_thick3' in fetch_list:
                         start = edge.src(self.gc.graph).point
                         end = edge.dst(self.gc.graph).point
                         if search_rect.contains(start) or search_rect.contains(end):
@@ -770,6 +771,7 @@ class Path(object):
                             end = end.sub(seg_origin)
                             cv.line(road_seg_small, (start.y // 4, start.x // 4),
                                     (end.y // 4, end.x // 4), color=1, thickness=1)
+                            cv.line(road_seg_thick3, (start.y, start.x), (end.y, end.x), color=1, thickness=3)
                 if not safe_rect.contains(extension_vertex.point):
                     clip_rect = search_rect.clip_rect(seg_rect)
                     start, end = clip_rect.start.sub(
@@ -790,6 +792,7 @@ class Path(object):
             'aerial_image_hwc':  aerial_image_hwc if 'aerial_image_hwc' in fetch_list else None,
             'walked_path_small': walked_path_small[np.newaxis, :, :] if 'walked_path_small' in fetch_list else None,
             'road_seg_small':    road_seg_small[np.newaxis, :, :] if 'road_seg_small' in fetch_list else None,
+            'road_seg_thick3':   road_seg_thick3[np.newaxis, :, :] if 'road_seg_thick3' in fetch_list else None,
             'junc_seg_small':    junc_seg_small[np.newaxis, :, :] if 'junc_seg_small' in fetch_list else None,
         }
         return ret_dict
