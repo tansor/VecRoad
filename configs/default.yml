@@ -5,7 +5,7 @@ DIR:
   IMAGERY_DIR:      "data/input/imagery/"
   TEST_IMAGERY_DIR: "data/input/imagery_8192/"
   GRAPH_DIR:        "data/input/graphs/"
-  ALL_REGION_PATH:  "data/input/regions/all_regions.json"
+  ALL_REGION_PATH:  "data/input/regions/all_regions.txt"
   TEST_REGION_PATH: "data/input/regions/test_regions.txt"
   PRE_JUNC_NMS_DIR: "data/input/junction_nms/"
   CHECK_POINT_DIR: !!python/object/apply:os.path.join [*DATA_ROOT, *TASK, "ckpt"]
